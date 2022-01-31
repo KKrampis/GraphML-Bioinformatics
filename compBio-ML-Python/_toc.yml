@@ -1,0 +1,4 @@
+format: jb-book
+root: intro
+chapters:
+- file: 1-graphs-intro.ipynb 
