@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Graph Theory and Network analysis in Bioinformatics &#8212; Python Algorithms for Bioinformatics</title>
+    <title>Graph Theory and Network analysis in Bioinformatics &#8212; Computational Biology &amp; Artificial Intelligence with Python</title>
     
   <link href="_static/css/theme.css" rel="stylesheet">
   <link href="_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
@@ -51,7 +51,8 @@
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="prev" title="Welcome to your Jupyter Book" href="intro.html" />
+    <link rel="next" title="Graph theory and machine learning for bioinformatics continued" href="2-graphs-parsing.html" />
+    <link rel="prev" title="A live Python coding book on Machine Learning &amp; AI applications to Computational Biology and Bioinformatics" href="intro.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -80,7 +81,7 @@
       <img src="_static/logo.png" class="logo" alt="logo">
       
       
-      <h1 class="site-logo" id="site-title">Python Algorithms for Bioinformatics</h1>
+      <h1 class="site-logo" id="site-title">Computational Biology & Artificial Intelligence with Python</h1>
       
     </a>
 </div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
@@ -91,7 +92,7 @@
         <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="intro.html">
-   Welcome to your Jupyter Book
+   A live Python coding book on Machine Learning &amp; AI applications to Computational Biology and Bioinformatics
   </a>
  </li>
 </ul>
@@ -99,6 +100,11 @@
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
    Graph Theory and Network analysis in Bioinformatics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2-graphs-parsing.html">
+   Graph theory and machine learning for bioinformatics continued
   </a>
  </li>
 </ul>
@@ -195,6 +201,62 @@
    What is a Graph
   </a>
  </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#an-example-of-a-biological-graph">
+   An example of a biological graph
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#protein-protein-interaction-ppi-network-graphs">
+   Protein-protein interaction (PPI) network graphs
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#let-s-create-a-graph-in-python">
+   Let’s create a graph in Python
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#we-only-have-nodes-vertices-1-2-3-let-s-connect-them-with-edges">
+   We only have nodes (vertices) 1,2,3 let’s connect them with edges
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#let-us-add-nodes-with-attributes">
+   Let us add nodes with attributes
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#graphs-for-complex-bioinformatics-data">
+   Graphs for complex bioinformatics data
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#data-structures-for-graphs-data">
+   Data structures for graphs data
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#let-s-see-this-in-python-code">
+   Let’s see this in Python code
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id1">
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id2">
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id3">
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id4">
+  </a>
+ </li>
 </ul>
 
             </nav>
@@ -223,6 +285,62 @@
  <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#what-is-a-graph">
    What is a Graph
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#an-example-of-a-biological-graph">
+   An example of a biological graph
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#protein-protein-interaction-ppi-network-graphs">
+   Protein-protein interaction (PPI) network graphs
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#let-s-create-a-graph-in-python">
+   Let’s create a graph in Python
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#we-only-have-nodes-vertices-1-2-3-let-s-connect-them-with-edges">
+   We only have nodes (vertices) 1,2,3 let’s connect them with edges
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#let-us-add-nodes-with-attributes">
+   Let us add nodes with attributes
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#graphs-for-complex-bioinformatics-data">
+   Graphs for complex bioinformatics data
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#data-structures-for-graphs-data">
+   Data structures for graphs data
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#let-s-see-this-in-python-code">
+   Let’s see this in Python code
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id1">
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id2">
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id3">
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id4">
   </a>
  </li>
 </ul>
@@ -258,12 +376,17 @@ and this <a class="reference external" href="https://www.ebi.ac.uk/training/onli
 <li><p>The <em>edges</em> can be of a specific type : <em>directed or undirected, weighted or not</em></p></li>
 <li><p>Both <em>nodes</em> and <em>edges</em> can have attributes attached to them</p></li>
 </ul>
+</div>
 <hr class="docutils" />
-<p><strong>An example of a biological graph is shown in the image below (credit <a class="reference external" href="http://www.plosone.org/article/info%3Adoi%2F10.1371%2Fjournal.pone.0004906">Hennah, Porteus</a> CC BY 2.5 Licence)</strong></p>
+<div class="section" id="an-example-of-a-biological-graph">
+<h1>An example of a biological graph<a class="headerlink" href="#an-example-of-a-biological-graph" title="Permalink to this headline">¶</a></h1>
+<p>(credit <a class="reference external" href="http://www.plosone.org/article/info%3Adoi%2F10.1371%2Fjournal.pone.0004906">Hennah, Porteus</a> CC BY 2.5 Licence)</p>
 <p><img alt="width:800px" src="https://upload.wikimedia.org/wikipedia/commons/7/72/Network_of_how_100_of_the_528_genes_identified_with_significant_differential_expression_relate_to_DISC1_and_its_core_interactors.png" /></p>
 <p>The different shapes of the nodes represent different attributes, the edges here are unweighted</p>
+</div>
 <hr class="docutils" />
-<p><strong>Example graphs in bioinformatics : Protein-protein interaction (PPI) networks</strong></p>
+<div class="section" id="protein-protein-interaction-ppi-network-graphs">
+<h1>Protein-protein interaction (PPI) network graphs<a class="headerlink" href="#protein-protein-interaction-ppi-network-graphs" title="Permalink to this headline">¶</a></h1>
 <ul class="simple">
 <li><p>Protein-protein interaction networks (PINs) represent the physical relationship among proteins present in a cell</p></li>
 <li><p>Proteins are nodes, and their interactions are undirected edges</p></li>
@@ -271,8 +394,10 @@ and this <a class="reference external" href="https://www.ebi.ac.uk/training/onli
 <li><p>Proteins with high degrees of connectedness (nodes with many links) are more likely to be essential for survival of the cell</p></li>
 <li><p>Source of this information and additional reading at this <a class="reference external" href="https://en.wikipedia.org/wiki/Biological_network">wiki article</a></p></li>
 </ul>
+</div>
 <hr class="docutils" />
-<p><strong>Let’s create a graph in Python</strong></p>
+<div class="section" id="let-s-create-a-graph-in-python">
+<h1>Let’s create a graph in Python<a class="headerlink" href="#let-s-create-a-graph-in-python" title="Permalink to this headline">¶</a></h1>
 <p><em>On Google Collab, run first “!pip install matplotlib”  and “!pip install networkx” (without the quotes)</em></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">networkx</span> <span class="k">as</span> <span class="nn">nx</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span>
@@ -286,8 +411,10 @@ and this <a class="reference external" href="https://www.ebi.ac.uk/training/onli
 <li><p>We will use a Python library called <a class="reference external" href="https://networkx.org/documentation/stable/tutorial.html">NetworkX</a></p></li>
 <li><p>First we create an <em>undirected</em> graph, meaning it does not matter which direction we travel along the edges</p></li>
 </ul>
+</div>
 <hr class="docutils" />
-<p><strong>We only have nodes (vertices) 1,2,3 let’s connect them with edges</strong></p>
+<div class="section" id="we-only-have-nodes-vertices-1-2-3-let-s-connect-them-with-edges">
+<h1>We only have nodes (vertices) 1,2,3 let’s connect them with edges<a class="headerlink" href="#we-only-have-nodes-vertices-1-2-3-let-s-connect-them-with-edges" title="Permalink to this headline">¶</a></h1>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">G</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span><span class="n">weight</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 
 <span class="n">e</span> <span class="o">=</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span> <span class="c1">#another way to add an edge</span>
@@ -296,34 +423,104 @@ and this <a class="reference external" href="https://www.ebi.ac.uk/training/onli
 <span class="n">G</span><span class="o">.</span><span class="n">add_nodes_from</span><span class="p">([</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">])</span> <span class="c1">#add two more vertices</span>
 <span class="n">G</span><span class="o">.</span><span class="n">add_edges_from</span><span class="p">([(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">)])</span> <span class="c1">#add edges differently</span>
 
-<span class="n">nx</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">with_labels</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">font_weight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+<span class="n">nx</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">with_labels</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">font_weight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span> <span class="c1">#labels used are node numbers </span>
 </pre></div>
 </div>
+</div>
 <hr class="docutils" />
-<p><strong>We only have nodes (vertices) 1,2,3 let’s connect them with edges</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
+<div class="section" id="let-us-add-nodes-with-attributes">
+<h1>Let us add nodes with attributes<a class="headerlink" href="#let-us-add-nodes-with-attributes" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">G</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="n">molecule</span><span class="o">=</span><span class="s2">&quot;protein&quot;</span><span class="p">)</span> <span class="c1">#now we also have vertex attribute</span>
+<span class="n">G</span><span class="o">.</span><span class="n">add_nodes_from</span><span class="p">([</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">],</span> <span class="n">molecule</span><span class="o">=</span><span class="s2">&quot;rna&quot;</span><span class="p">)</span> <span class="c1">#add a bunch of RNA vertices</span>
+<span class="n">G</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s2">&quot;molecule&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;protein&quot;</span>  <span class="c1">#modify attributes of existing vertex</span>
+<span class="n">G</span><span class="o">.</span><span class="n">add_edges_from</span><span class="p">([(</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">),(</span><span class="mi">5</span><span class="p">,</span><span class="mi">7</span><span class="p">),(</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">),(</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">)])</span><span class="c1">#connect these to the graph</span>
+
+<span class="n">labels</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">get_node_attributes</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="s1">&#39;molecule&#39;</span><span class="p">)</span> <span class="c1">#using custom labels for nodes</span>
+<span class="n">nx</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="n">labels</span><span class="p">,</span> <span class="n">font_weight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span> 
 
 </pre></div>
 </div>
 <hr class="docutils" />
-<p><strong>Graphs for complex bioinformatics data</strong></p>
+<p><strong>Refer to these links for the graph coding examples and exercises</strong></p>
+<p>Full documentation in NetworkX <a class="reference external" href="https://networkx.org/documentation/stable/tutorial.html">tutorial</a>
+and <a class="reference external" href="https://networkx.org/documentation/stable/reference/classes/index.html">NetworkX reference</a></p>
+</div>
+<hr class="docutils" />
+<div class="section" id="graphs-for-complex-bioinformatics-data">
+<h1>Graphs for complex bioinformatics data<a class="headerlink" href="#graphs-for-complex-bioinformatics-data" title="Permalink to this headline">¶</a></h1>
 <p><img alt="" src="https://www.ebi.ac.uk/training/online/courses/network-analysis-of-protein-interaction-data-an-introduction/wp-content/uploads/sites/64/2020/08/new-fig-3.png" />
-<strong>(credit <a class="reference external" href="https://www.ebi.ac.uk/training/online/courses/network-analysis-of-protein-interaction-data-an-introduction/introduction-to-graph-theory/graph-theory-graph-types-and-edge-properties/">European Bioinformatics Institute</a> CC BY 2.5 Licence)</strong></p>
+(credit <a class="reference external" href="https://www.ebi.ac.uk/training/online/courses/network-analysis-of-protein-interaction-data-an-introduction/introduction-to-graph-theory/graph-theory-graph-types-and-edge-properties/">European Bioinformatics Institute</a> CC BY 2.5 Licence)</p>
+</div>
 <hr class="docutils" />
-<p><strong>Data structures for graphs data</strong></p>
+<div class="section" id="data-structures-for-graphs-data">
+<h1>Data structures for graphs data<a class="headerlink" href="#data-structures-for-graphs-data" title="Permalink to this headline">¶</a></h1>
 <p><img alt="" src="https://www.ebi.ac.uk/training/online/courses/network-analysis-of-protein-interaction-data-an-introduction/wp-content/uploads/sites/64/2020/08/new-fig-4.png" />
-<strong>(credit <a class="reference external" href="https://www.ebi.ac.uk/training/online/courses/network-analysis-of-protein-interaction-data-an-introduction/introduction-to-graph-theory/graph-theory-graph-types-and-edge-properties/">European Bioinformatics Institute</a> CC BY 2.5 Licence)</strong></p>
+(credit <a class="reference external" href="https://www.ebi.ac.uk/training/online/courses/network-analysis-of-protein-interaction-data-an-introduction/introduction-to-graph-theory/graph-theory-graph-types-and-edge-properties/">European Bioinformatics Institute</a> CC BY 2.5 Licence)</p>
+</div>
 <hr class="docutils" />
-<p><strong>Graphs for complex bioinformatics data</strong></p>
+<div class="section" id="let-s-see-this-in-python-code">
+<h1>Let’s see this in Python code<a class="headerlink" href="#let-s-see-this-in-python-code" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p>Directed graphs represent directed control, for example biological regulation data</p></li>
+<li><p>For example Gene A, regulates Gene B</p></li>
+<li><p>Or Protein A controls gene expression of Gene C</p></li>
+</ul>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
+<span class="n">G1</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">DiGraph</span><span class="p">()</span> <span class="c1">#now we have a directed graph</span>
+<span class="n">G1</span><span class="o">.</span><span class="n">add_edges_from</span><span class="p">([(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">)])</span> <span class="c1">#this adds nodes and edges </span>
+<span class="n">G1</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s2">&quot;name&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;GeneA&quot;</span>
+<span class="n">G1</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="s2">&quot;name&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;GeneB&quot;</span>
+<span class="n">G1</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="mi">3</span><span class="p">][</span><span class="s2">&quot;name&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;ProteinA&quot;</span>
+<span class="n">G1</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="mi">4</span><span class="p">][</span><span class="s2">&quot;name&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;GeneC&quot;</span>
+<span class="n">labels</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">get_node_attributes</span><span class="p">(</span><span class="n">G1</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span><span class="p">)</span> <span class="c1">#using custom labels for nodes nx.draw(G1, labels=labels, font_weight=&#39;bold&#39;) </span>
 
 </pre></div>
 </div>
+</div>
 <hr class="docutils" />
-<p><strong>i</strong></p>
+<div class="section" id="id1">
+<h1><a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<p><img alt="" src="https://www.ebi.ac.uk/training/online/courses/network-analysis-of-protein-interaction-data-an-introduction/wp-content/uploads/sites/64/2020/08/new-fig-5.png" /><br>
+(credit <a class="reference external" href="https://www.ebi.ac.uk/training/online/courses/network-analysis-of-protein-interaction-data-an-introduction/introduction-to-graph-theory/graph-theory-graph-types-and-edge-properties/">European Bioinformatics Institute</a> CC BY 2.5 Licence)</p>
+<ul class="simple">
+<li><p>The degree is the number of edges that connect to a node</p></li>
+<li><p>The degree of each node is indicated and reflected in its size and colour</p></li>
+<li><p>Directed network nodes have two values : out-degree and in-degree</p></li>
+</ul>
+</div>
+<hr class="docutils" />
+<div class="section" id="id2">
+<h1><a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h1>
+<p><img alt="" src="https://www.ebi.ac.uk/training/online/courses/network-analysis-of-protein-interaction-data-an-introduction/wp-content/uploads/sites/64/2020/08/new-fig-6.png" /><br>
+(credit <a class="reference external" href="https://www.ebi.ac.uk/training/online/courses/network-analysis-of-protein-interaction-data-an-introduction/introduction-to-graph-theory/graph-theory-graph-types-and-edge-properties/">European Bioinformatics Institute</a> CC BY 2.5 Licence)</p>
+<ul class="simple">
+<li><p>Paths between nodes : how many nodes “hops” or steps</p></li>
+<li><p>Is used to model how information flows</p></li>
+<li><p>Also to model how distant protein / genes control others</p></li>
+<li><p>Algorithms to calculate shortest paths on the graph</p></li>
+</ul>
+</div>
+<hr class="docutils" />
+<div class="section" id="id3">
+<h1><a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h1>
+<p><img alt="" src="https://www.ebi.ac.uk/training/online/courses/network-analysis-of-protein-interaction-data-an-introduction/wp-content/uploads/sites/64/2020/08/new-fig-7.png" /><br>
+(credit <a class="reference external" href="https://www.ebi.ac.uk/training/online/courses/network-analysis-of-protein-interaction-data-an-introduction/introduction-to-graph-theory/graph-theory-graph-types-and-edge-properties/">European Bioinformatics Institute</a> CC BY 2.5 Licence)</p>
+<ul class="simple">
+<li><p>Scale-free networks are those which have high connectivity hubs</p></li>
+<li><p>This means (sometimes equally) short paths from one section of the network to the other</p></li>
+<li><p>Additional concepts of centrality and transitivity, see <a class="reference external" href="https://www.ebi.ac.uk/training/online/courses/network-analysis-of-protein-interaction-data-an-introduction/introduction-to-graph-theory/graph-theory-network-topology/">here</a> for more details</p></li>
+</ul>
+</div>
+<hr class="docutils" />
+<div class="section" id="id4">
+<h1><a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h1>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
+<hr class="docutils" />
+<p><strong>Author: Konstantinos Krampis, 2021</strong><br><br>
+License: Creative Commons Attribution-NonCommercial-NoDerivs<br><br>
+<a class="reference external" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">CC BY-NC-ND</a> <img alt="" src="https://licensebuttons.net/l/by-nc-nd/3.0/88x31.png" /></p>
 </div>
 
     <script type="text/x-thebe-config">
@@ -355,8 +552,15 @@ and this <a class="reference external" href="https://www.ebi.ac.uk/training/onli
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Welcome to your Jupyter Book</p>
+            <p class="prev-next-title">A live Python coding book on Machine Learning &amp; AI applications to Computational Biology and Bioinformatics</p>
         </div>
+    </a>
+    <a class='right-next' id="next-link" href="2-graphs-parsing.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Graph theory and machine learning for bioinformatics continued</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
     </a>
 </div>
             
@@ -365,7 +569,7 @@ and this <a class="reference external" href="https://www.ebi.ac.uk/training/onli
     <footer class="footer">
   <p>
     
-      By Konstantinos Krampis<br/>
+      By The Jupyter Book community<br/>
     
         &copy; Copyright 2021.<br/>
   </p>

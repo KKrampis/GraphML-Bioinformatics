@@ -1,0 +1,699 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Graph theory and machine learning for bioinformatics continued &#8212; Computational Biology &amp; Artificial Intelligence with Python</title>
+    
+  <link href="_static/css/theme.css" rel="stylesheet">
+  <link href="_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/togglebutton.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script>
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Graph Theory and Network analysis in Bioinformatics" href="1-graphs-intro.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Computational Biology & Artificial Intelligence with Python</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="intro.html">
+   A live Python coding book on Machine Learning &amp; AI applications to Computational Biology and Bioinformatics
+  </a>
+ </li>
+</ul>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="1-graphs-intro.html">
+   Graph Theory and Network analysis in Bioinformatics
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Graph theory and machine learning for bioinformatics continued
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="_sources/2-graphs-parsing.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/bioitx/genomics-AI"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Graph theory and machine learning for bioinformatics continued
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#example-biological-graph-data-sources-for-bioinformatics-research">
+   Example biological Graph data sources for bioinformatics research
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#biological-graph-data-formats">
+   Biological Graph data formats
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#psi-mi-tab-in-terminal">
+   PSI-MI TAB in terminal
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#psi-mi-tab-in-excel">
+   PSI-MI TAB in Excel
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#parsing-psi-mi-tab-and-creating-a-graph-with-networkx">
+   Parsing PSI-MI TAB and creating a Graph with NetworkX
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#some-more-google-collab-tricks">
+   Some more Google Collab tricks
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id1">
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#draw-the-graphs">
+   Draw the graphs
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#example-networks-with-the-different-tsv-files">
+   Example networks with the different .tsv files
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#connectivity-of-the-graph-nodes">
+   Connectivity of the Graph nodes
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id2">
+   Connectivity of the Graph nodes
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#some-more-connectivity-metrics">
+   Some more connectivity metrics
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#paths-on-the-graph">
+   Paths on the Graph
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#algorithmic-formal-paths-on-the-graph">
+   Algorithmic / formal paths on the Graph
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#algorithmic-paths-on-networkx">
+   Algorithmic paths on networkx
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#bonus-adjacency-matrices-and-easy-loading-from-files">
+   Bonus: adjacency matrices and easy loading from files
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-documentation-of-functions-and-algorithms-of-networkx">
+   The documentation of functions and algorithms of networkx
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Graph theory and machine learning for bioinformatics continued</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Graph theory and machine learning for bioinformatics continued
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#example-biological-graph-data-sources-for-bioinformatics-research">
+   Example biological Graph data sources for bioinformatics research
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#biological-graph-data-formats">
+   Biological Graph data formats
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#psi-mi-tab-in-terminal">
+   PSI-MI TAB in terminal
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#psi-mi-tab-in-excel">
+   PSI-MI TAB in Excel
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#parsing-psi-mi-tab-and-creating-a-graph-with-networkx">
+   Parsing PSI-MI TAB and creating a Graph with NetworkX
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#some-more-google-collab-tricks">
+   Some more Google Collab tricks
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id1">
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#draw-the-graphs">
+   Draw the graphs
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#example-networks-with-the-different-tsv-files">
+   Example networks with the different .tsv files
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#connectivity-of-the-graph-nodes">
+   Connectivity of the Graph nodes
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id2">
+   Connectivity of the Graph nodes
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#some-more-connectivity-metrics">
+   Some more connectivity metrics
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#paths-on-the-graph">
+   Paths on the Graph
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#algorithmic-formal-paths-on-the-graph">
+   Algorithmic / formal paths on the Graph
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#algorithmic-paths-on-networkx">
+   Algorithmic paths on networkx
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#bonus-adjacency-matrices-and-easy-loading-from-files">
+   Bonus: adjacency matrices and easy loading from files
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-documentation-of-functions-and-algorithms-of-networkx">
+   The documentation of functions and algorithms of networkx
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="section" id="graph-theory-and-machine-learning-for-bioinformatics-continued">
+<h1>Graph theory and machine learning for bioinformatics continued<a class="headerlink" href="#graph-theory-and-machine-learning-for-bioinformatics-continued" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p>We used a Python library called <a class="reference external" href="https://networkx.org/documentation/stable/tutorial.html">NetworkX</a></p></li>
+<li><p>Examined different types of graphs, directed, undirected, weighted etc.</p></li>
+<li><p>Easy with sample data and few nodes, we will now learn to parse real datasets</p></li>
+<li><p>We will also warm up with Python so we can move to more advanced coding subsequently</p></li>
+</ul>
+</div>
+<hr class="docutils" />
+<div class="section" id="example-biological-graph-data-sources-for-bioinformatics-research">
+<h1>Example biological Graph data sources for bioinformatics research<a class="headerlink" href="#example-biological-graph-data-sources-for-bioinformatics-research" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p>Biological General Repository for Interaction Datasets : <a class="reference external" href="https://thebiogrid.org/">BioGrid</a></p></li>
+<li><p>European Bioinformatics Institute : <a class="reference external" href="https://www.ebi.ac.uk/intact/home">IntAct</a></p></li>
+<li><p>Stanford Biomedical Network Dataset Collection : <a class="reference external" href="http://snap.stanford.edu/biodata/index.html">SNAP</a></p></li>
+</ul>
+</div>
+<hr class="docutils" />
+<div class="section" id="biological-graph-data-formats">
+<h1>Biological Graph data formats<a class="headerlink" href="#biological-graph-data-formats" title="Permalink to this headline">¶</a></h1>
+<p>A range of available formats from <a class="reference external" href="https://wiki.thebiogrid.org/doku.php/downloads">BioGrid</a>
+The official specification of <a class="reference external" href="https://psicquic.github.io/MITAB27Format.html">PSI-MI TAB</a></p>
+<ul class="simple">
+<li><p>Most intuitive is to use tab-delimited formats such as PSI-MI TAB</p></li>
+<li><p>We prefer the latest version of PSI-MI TAB (or at least &gt;2.6)</p></li>
+<li><p>We can get the node annotations without additonal database referrals</p></li>
+</ul>
+</div>
+<hr class="docutils" />
+<div class="section" id="psi-mi-tab-in-terminal">
+<h1>PSI-MI TAB in terminal<a class="headerlink" href="#psi-mi-tab-in-terminal" title="Permalink to this headline">¶</a></h1>
+<p><img alt="PSI-MI TAB 2.7 in terminal" src="https://i.ibb.co/WxywbSz/Screenshot-2022-02-07-7-47-42-PM.png" /></p>
+</div>
+<hr class="docutils" />
+<div class="section" id="psi-mi-tab-in-excel">
+<h1>PSI-MI TAB in Excel<a class="headerlink" href="#psi-mi-tab-in-excel" title="Permalink to this headline">¶</a></h1>
+<p><img alt="PSI-MI TAB 2.7 in Excel" src="https://i.ibb.co/D4jHKts/Screenshot-2022-02-07-8-31-41-PM.png" />
+<a class="reference external" href="https://easyupload.io/xnrb66">.tsv file 1 parse with Python in Collab</a>
+<a class="reference external" href="https://easyupload.io/nfycv0">.tsv file 2 parse with Python in Collab</a>
+<a class="reference external" href="https://easyupload.io/rs5b9m">.tsv file 3 parse with Python in Collab</a></p>
+</div>
+<hr class="docutils" />
+<div class="section" id="parsing-psi-mi-tab-and-creating-a-graph-with-networkx">
+<h1>Parsing PSI-MI TAB and creating a Graph with NetworkX<a class="headerlink" href="#parsing-psi-mi-tab-and-creating-a-graph-with-networkx" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p>We will be using this <a class="reference external" href="https://colab.research.google.com/drive/1CQkYrIfRJFMRWmMR9MZ5W-yBj0QhxAMx?usp=sharing">Collab Python notebook</a></p></li>
+<li><p>“File-&gt;Save Copy” the notebook under your Google account to edit or execute</p></li>
+<li><p>Remember the upload and copy path buttons to use .tsv from within Collab <img alt="" src="https://i.ibb.co/d0nHpLG/colab-download.png" /></p></li>
+<li><p>And also see this <a class="reference external" href="https://www.youtube.com/watch?v=6HFlwqK3oeo">video</a></p></li>
+</ul>
+</div>
+<hr class="docutils" />
+<div class="section" id="some-more-google-collab-tricks">
+<h1>Some more Google Collab tricks<a class="headerlink" href="#some-more-google-collab-tricks" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p>You can actually execute Unix commands, again see <a class="reference external" href="https://colab.research.google.com/drive/1CQkYrIfRJFMRWmMR9MZ5W-yBj0QhxAMx?usp=sharing">Collab Python notebook</a></p></li>
+<li><p>Also refer to the <a class="reference external" href="https://psicquic.github.io/MITAB27Format.html">PSI-MI TAB fields</a></p></li>
+<li><p>How many edges we have in total - can we tell before even using NetworkX ?</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
+!cut -f 1-2,17-18 /content/18467557.tsv | head -n 4
+
+!cut -f 1-2,17-18 /content/18467557.tsv | sed -e &#39;s/uniprotkb\://g&#39; &gt; /content/network.tsv
+
+!wc -l network.tsv
+
+</pre></div>
+</div>
+</div>
+<hr class="docutils" />
+<div class="section" id="id1">
+<h1><a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p>Let’s parse out the file and make a Graph with NetworkX</p></li>
+<li><p>We open the file for reading each line ‘for line in f’</p></li>
+<li><p>The Python operations within the ‘[]’ will generate a list with the results</p></li>
+<li><p>We split each line based on tabs (‘\t’) in a temporary array (the nested ‘[:2]’)</p></li>
+<li><p>From that nested array we get the first two elements 0,1 ([:2] the 2 not inclusive) and store in ‘pairset’ array</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;/content/network.tsv&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+
+  <span class="n">pairset</span> <span class="o">=</span> <span class="p">[</span><span class="n">line</span><span class="o">.</span><span class="n">rstrip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">)[:</span><span class="mi">2</span><span class="p">]</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">f</span><span class="p">]</span>
+
+<span class="n">pairset</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">4</span><span class="p">]</span>
+
+</pre></div>
+</div>
+</div>
+<hr class="docutils" />
+<div class="section" id="draw-the-graphs">
+<h1>Draw the graphs<a class="headerlink" href="#draw-the-graphs" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p>Again do not forget the <strong>‘import network as nx’</strong> etc. statements as needed in the beginning of your Collab code</p></li>
+<li><p>Remember the G.add_edges_from([(3, 4), (3, 5)]) to add edges and nodes simultaneously</p></li>
+<li><p>Why ‘pairset[1:]’ ? See also <a class="reference external" href="https://colab.research.google.com/drive/1CQkYrIfRJFMRWmMR9MZ5W-yBj0QhxAMx?usp=sharing">Collab Python notebook</a></p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
+G = nx.Graph()
+G.add_edges_from(pairset[1:])
+nx.draw(G, with_labels=True)
+rkx.algorithms.tournament.hamiltonian_path¶
+
+
+nodes = list(G.nodes)
+print(nodes[0:10])
+
+</pre></div>
+</div>
+<p><img alt="" src="https://i.ibb.co/BtRHw5D/Screenshot-2022-02-08-3-07-57-PM.png" /></p>
+</div>
+<hr class="docutils" />
+<div class="section" id="example-networks-with-the-different-tsv-files">
+<h1>Example networks with the different .tsv files<a class="headerlink" href="#example-networks-with-the-different-tsv-files" title="Permalink to this headline">¶</a></h1>
+<p><img alt="" src="https://i.ibb.co/YRfxRkL/download-1.png" />
+<img alt="" src="https://i.ibb.co/NjBLx1m/download.png" /></p>
+</div>
+<hr class="docutils" />
+<div class="section" id="connectivity-of-the-graph-nodes">
+<h1>Connectivity of the Graph nodes<a class="headerlink" href="#connectivity-of-the-graph-nodes" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p>Number of edges per node, a  histogram in descending order</p></li>
+<li><p>Note the special import of functions from networkx</p></li>
+<li><p>No information for which node has the highest number of connections</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">networkx.classes.function</span> <span class="kn">import</span> <span class="n">info</span><span class="p">,</span> <span class="n">degree_histogram</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">info</span><span class="p">(</span><span class="n">G</span><span class="p">))</span>
+
+<span class="n">deghist</span> <span class="o">=</span> <span class="n">degree_histogram</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+<span class="n">deghist</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">deghist</span><span class="p">)</span>
+
+</pre></div>
+</div>
+</div>
+<hr class="docutils" />
+<div class="section" id="id2">
+<h1>Connectivity of the Graph nodes<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p>This a normalized metric on how well connected a node is, <a class="reference external" href="https://towardsdatascience.com/graph-analytics-introduction-and-concepts-of-centrality-8f5543b55de3">read definition here</a></p></li>
+<li><p>Here we see which node the number the node corresponds to, using dictionary key-value pairs</p></li>
+<li><p>Notice the Python code for sorting the dictionary on its values</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
+<span class="kn">from</span> <span class="nn">networkx.algorithms.centrality</span> <span class="kn">import</span> <span class="n">degree_centrality</span>
+
+<span class="n">deg</span> <span class="o">=</span> <span class="n">degree_centrality</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">deg</span><span class="p">)</span>
+
+<span class="n">sorted_deg</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span> <span class="p">(</span> <span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span> <span class="k">for</span> <span class="p">(</span><span class="n">key</span><span class="p">,</span><span class="n">value</span><span class="p">)</span> <span class="ow">in</span> <span class="n">deg</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="p">),</span><span class="n">key</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sorted_deg</span><span class="p">)</span>
+
+</pre></div>
+</div>
+</div>
+<hr class="docutils" />
+<div class="section" id="some-more-connectivity-metrics">
+<h1>Some more connectivity metrics<a class="headerlink" href="#some-more-connectivity-metrics" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p>This returns a dictionary with the first node id as key, and dictionaries as values</p></li>
+<li><p>Each value dictionary, contains key-values with second node id and number of deletions for disconnect</p></li>
+<li><p><a class="reference external" href="https://networkx.org/documentation/stable/reference/algorithms/generated/networkx.algorithms.connectivity.connectivity.all_pairs_node_connectivity.html">See defintion and all algorithms here</a></p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">networkx.algorithms.approximation.connectivity</span> <span class="kn">import</span> <span class="n">all_pairs_node_connectivity</span>
+
+<span class="n">allpaircon</span> <span class="o">=</span> <span class="n">all_pairs_node_connectivity</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">allpaircon</span><span class="p">)</span>
+
+</pre></div>
+</div>
+</div>
+<hr class="docutils" />
+<div class="section" id="paths-on-the-graph">
+<h1>Paths on the Graph<a class="headerlink" href="#paths-on-the-graph" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p>Path from one node to other, and cyclic paths formed between nodes</p></li>
+<li><p>Note the ‘casting’ as list, because these methods return a ‘generator’</p></li>
+<li><p>Saves memory and instantiated as list when requested as in code below</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
+<span class="kn">from</span> <span class="nn">networkx.algorithms.simple_paths</span> <span class="kn">import</span> <span class="n">all_simple_paths</span>
+<span class="kn">from</span> <span class="nn">networkx.algorithms.cycles</span> <span class="kn">import</span> <span class="n">cycle_basis</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">all_simple_paths</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="s1">&#39;Q99836&#39;</span><span class="p">,</span> <span class="s1">&#39;Q9UGK3&#39;</span><span class="p">)))</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">cycle_basis</span><span class="p">(</span><span class="n">G</span><span class="p">)))</span>
+
+</pre></div>
+</div>
+</div>
+<hr class="docutils" />
+<div class="section" id="algorithmic-formal-paths-on-the-graph">
+<h1>Algorithmic / formal paths on the Graph<a class="headerlink" href="#algorithmic-formal-paths-on-the-graph" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p><a class="reference external" href="https://en.wikipedia.org/wiki/Hamiltonian_path">Hamiltonian path</a> visit each node exactly one time</p></li>
+<li><p><a class="reference external" href="https://en.wikipedia.org/wiki/Eulerian_path">Eulerian path</a> visit each edge only once (you can revisit nodes)</p></li>
+</ul>
+<p><img alt="height:12cm" src="https://i.ytimg.com/vi/CEOGcSCTar8/maxresdefault.jpg" /></p>
+<p><a class="reference external" href="https://www.youtube.com/watch?v=CEOGcSCTar8">image credit and more information</a></p>
+</div>
+<hr class="docutils" />
+<div class="section" id="algorithmic-paths-on-networkx">
+<h1>Algorithmic paths on networkx<a class="headerlink" href="#algorithmic-paths-on-networkx" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p>Details in networkx documentation <a class="reference external" href="https://networkx.org/documentation/stable/reference/algorithms/generated/networkx.algorithms.tournament.hamiltonian_path.html">here</a></p></li>
+<li><p><a class="reference external" href="https://networkx.org/documentation/stable/reference/algorithms/generated/networkx.algorithms.euler.is_eulerian.html">and here</a></p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">networkx.algorithms.tournament</span> <span class="kn">import</span> <span class="n">hamiltonian_path</span>
+<span class="kn">from</span> <span class="nn">networkx.algorithms.euler</span> <span class="kn">import</span> <span class="n">is_eulerian</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">is_eulerian</span><span class="p">(</span><span class="n">G</span><span class="p">))</span>
+<span class="n">hamiltonian_path</span><span class="p">(</span><span class="n">G</span><span class="o">.</span><span class="n">to_directed</span><span class="p">())</span>
+
+</pre></div>
+</div>
+</div>
+<hr class="docutils" />
+<div class="section" id="bonus-adjacency-matrices-and-easy-loading-from-files">
+<h1>Bonus: adjacency matrices and easy loading from files<a class="headerlink" href="#bonus-adjacency-matrices-and-easy-loading-from-files" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p>Print adjacency matrix of the graph</p></li>
+<li><p>Read graph automatically from a two-column file</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
+from networkx.linalg.graphmatrix import adjacency_matrix
+adjacency_matrix(G).toarray()
+
+from networkx.readwrite.adjlist import read_adjlist
+!cut -f 1-2 /content/16365431.tsv &gt; /content/network.tsv
+G = read_adjlist(&#39;/content/network.tsv&#39;)
+nx.draw(G, with_labels=True)
+
+</pre></div>
+</div>
+</div>
+<hr class="docutils" />
+<div class="section" id="the-documentation-of-functions-and-algorithms-of-networkx">
+<h1>The documentation of functions and algorithms of networkx<a class="headerlink" href="#the-documentation-of-functions-and-algorithms-of-networkx" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p><a class="reference external" href="https://networkx.org/documentation/stable/reference/functions.html">Functions</a></p></li>
+<li><p><a class="reference external" href="https://networkx.org/documentation/stable/reference/algorithms/index.html">Algorithms</a></p></li>
+</ul>
+<hr class="docutils" />
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="1-graphs-intro.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Graph Theory and Network analysis in Bioinformatics</p>
+        </div>
+    </a>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By The Jupyter Book community<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>

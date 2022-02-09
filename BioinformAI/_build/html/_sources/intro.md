@@ -1,16 +1,11 @@
-# Welcome to your Jupyter Book
+#### A live Python coding book on Machine Learning & AI applications to Computational Biology and Bioinformatics
+<br>
+**Author:**<br>
+**Konstantinos Krampis**<br>
+**Associate Professor, Biological Science**<br>
+**Hunter College, City University of New York**
 
-This is a small sample book to give you a feel for how book content is
-structured.
 
-:::{note}
-Here is a note!
-:::
-
-And here is a code block:
-
-```
-e = mc^2
-```
-
-Check out the content pages bundled with this sample book to see more.
+**Author: Konstantinos Krampis, 2021**<br><br> 
+License: Creative Commons Attribution-NonCommercial-NoDerivs<br><br>
+[CC BY-NC-ND](https://creativecommons.org/licenses/by-nc-nd/4.0/) ![](https://licensebuttons.net/l/by-nc-nd/3.0/88x31.png) 
