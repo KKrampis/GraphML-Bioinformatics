@@ -2,3 +2,6 @@ format: jb-book
 root: intro
 chapters:
 - file: 1-graphs-intro.ipynb 
+- file: 2-graphs-parsing.ipynb 
+- file: 3-graphs-ml-intro.ipynb 
+- file: 4-tensors-hot-spektral.ipynb

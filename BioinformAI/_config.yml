@@ -1,8 +1,8 @@
 # Book settings
 # Learn more at https://jupyterbook.org/customize/config.html
 
-title: Python Algorithms for Bioinformatics
-author: Konstantinos Krampis
+title: Computational Biology & Artificial Intelligence with Python
+#author: Konstantinos Krampis
 logo: logo.png
 
 # Force re-execution of notebooks on each build.
@@ -13,7 +13,7 @@ execute:
 # Define the name of the latex output file for PDF builds
 latex:
   latex_documents:
-    targetname: pythonalg.tex
+    targetname: pythoncompbioML.tex
 
 # Add a bibtex file so that we can create citations
 bibtex_bibfiles:
@@ -22,8 +22,13 @@ bibtex_bibfiles:
 # Information about where the book exists on the web
 repository:
   url: https://github.com/bioitx/genomics-AI #Online location of your book
-  path_to_book: docs  # Optional path to your book, relative to the repository root
+  path_to_book: compBio-ML-Python  # Optional path to your book, relative to the repository root
   branch: master  # Which branch of the repository should be used when creating links (optional)
+
+launch_buttons:
+  binderhub_url: "https://mybinder.org"
+  colab_url: "https://colab.research.google.com"
+
 
 # Add GitHub buttons to your book
 # See https://jupyterbook.org/customize/config.html#add-a-link-to-your-repository

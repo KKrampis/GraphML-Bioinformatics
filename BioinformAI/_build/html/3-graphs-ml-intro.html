@@ -1,0 +1,640 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Graphs and and machine learning for protein function prediction &#8212; Computational Biology &amp; Artificial Intelligence with Python</title>
+    
+  <link href="_static/css/theme.css" rel="stylesheet">
+  <link href="_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/togglebutton.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script>
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Graph theory and machine learning for bioinformatics continued" href="2-graphs-parsing.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Computational Biology & Artificial Intelligence with Python</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="intro.html">
+   A live Python coding book on Machine Learning &amp; AI applications to Computational Biology and Bioinformatics
+  </a>
+ </li>
+</ul>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="1-graphs-intro.html">
+   Graph Theory and Network analysis in Bioinformatics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2-graphs-parsing.html">
+   Graph theory and machine learning for bioinformatics continued
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Graphs and and machine learning for protein function prediction
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="_sources/3-graphs-ml-intro.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/bioitx/genomics-AI"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Graphs and and machine learning for protein function prediction
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#prepare-file-with-network-data">
+   Prepare file with network data
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#python-list-slicing-and-lambda-functions">
+   Python list slicing and lambda functions
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#let-s-parse-out-the-file-and-make-a-graph-with-networkx">
+   Let’s parse out the file and make a Graph with NetworkX
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id1">
+   Let’s parse out the file and make a Graph with NetworkX
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#a-smaller-graph-to-visualize-easier">
+   A smaller graph to visualize easier
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#more-dimensions-in-the-node-data-for-machine-predictions">
+   More dimensions in the node data for machine predictions
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#how-do-we-code-human-writen-text-for-machine-predictions">
+   How do we code human writen text for machine predictions
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id2">
+   How do we code human writen text for machine predictions
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#back-to-bioinformatics">
+   Back to bioinformatics !
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#bag-of-words-representation">
+   Bag of words representation
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id3">
+   Bag of words representation
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#let-s-parse-out-the-annotations">
+   Let’s parse out the annotations
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#let-s-one-hot-encode-the-annotations">
+   Let’s one-hot encode the annotations
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Graphs and and machine learning for protein function prediction</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Graphs and and machine learning for protein function prediction
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#prepare-file-with-network-data">
+   Prepare file with network data
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#python-list-slicing-and-lambda-functions">
+   Python list slicing and lambda functions
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#let-s-parse-out-the-file-and-make-a-graph-with-networkx">
+   Let’s parse out the file and make a Graph with NetworkX
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id1">
+   Let’s parse out the file and make a Graph with NetworkX
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#a-smaller-graph-to-visualize-easier">
+   A smaller graph to visualize easier
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#more-dimensions-in-the-node-data-for-machine-predictions">
+   More dimensions in the node data for machine predictions
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#how-do-we-code-human-writen-text-for-machine-predictions">
+   How do we code human writen text for machine predictions
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id2">
+   How do we code human writen text for machine predictions
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#back-to-bioinformatics">
+   Back to bioinformatics !
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#bag-of-words-representation">
+   Bag of words representation
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id3">
+   Bag of words representation
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#let-s-parse-out-the-annotations">
+   Let’s parse out the annotations
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#let-s-one-hot-encode-the-annotations">
+   Let’s one-hot encode the annotations
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="section" id="graphs-and-and-machine-learning-for-protein-function-prediction">
+<h1>Graphs and and machine learning for protein function prediction<a class="headerlink" href="#graphs-and-and-machine-learning-for-protein-function-prediction" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p>Building the graph instance from the experimental data (i.e. PPI network if protein interactions)</p></li>
+<li><p>Loading the graph entities (nodes mainly) with multidimensional data in order to enable predictions</p></li>
+<li><p>Running machine learning algorithms on the graph for protein function inference on the unknown nodes</p></li>
+</ul>
+</div>
+<hr class="docutils" />
+<div class="section" id="prepare-file-with-network-data">
+<h1>Prepare file with network data<a class="headerlink" href="#prepare-file-with-network-data" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
+!wc -l 15761153-cut.tsv
+!cut -f 1-2,17-22 ./content/15761153.txt | head -n 2
+!cut -f 1-2,19-20./content/15761153.txt &gt; ./content/15761153-cut.tsv
+
+</pre></div>
+</div>
+</div>
+<hr class="docutils" />
+<div class="section" id="python-list-slicing-and-lambda-functions">
+<h1>Python list slicing and lambda functions<a class="headerlink" href="#python-list-slicing-and-lambda-functions" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p>Multiple tutorials can found online on these topics, example links are given here</p></li>
+<li><p>On lambdas, see <a class="reference external" href="https://cs.stanford.edu/people/nick/py/python-map-lambda.html">here</a> and <a class="reference external" href="https://www.geeksforgeeks.org/python-lambda-anonymous-functions-filter-map-reduce/">here</a></p></li>
+<li><p>For list slicing see <a class="reference external" href="https://www.geeksforgeeks.org/python-list-slicing/">here</a> and <a class="reference external" href="https://stackoverflow.com/questions/509211/understanding-slice-notation">here</a></p></li>
+<li><p>Read material on links above !</p></li>
+</ul>
+</div>
+<hr class="docutils" />
+<div class="section" id="let-s-parse-out-the-file-and-make-a-graph-with-networkx">
+<h1>Let’s parse out the file and make a Graph with NetworkX<a class="headerlink" href="#let-s-parse-out-the-file-and-make-a-graph-with-networkx" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;/home/bioitx/Author/private-bioitx-AI/BioinformAI/content/15761153-cut.tsv&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+  <span class="n">graphdata</span> <span class="o">=</span> <span class="p">[</span><span class="n">line</span><span class="o">.</span><span class="n">rstrip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">)</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">f</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">graphdata</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">])</span>
+
+<span class="n">graphdataclean</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">graphdata</span><span class="p">[</span><span class="mi">1</span><span class="p">:]:</span>
+  <span class="n">graphdataclean</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">element</span><span class="p">:</span> <span class="n">element</span><span class="p">[</span><span class="mi">10</span><span class="p">:],</span> <span class="n">row</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">]))</span> \
+                      <span class="o">+</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">element</span><span class="p">:</span> <span class="n">element</span><span class="p">[</span><span class="mi">17</span><span class="p">:</span><span class="mi">21</span><span class="p">],</span> <span class="n">row</span><span class="p">[</span><span class="mi">2</span><span class="p">:])))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">graphdataclean</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+</pre></div>
+</div>
+</div>
+<hr class="docutils" />
+<div class="section" id="id1">
+<h1>Let’s parse out the file and make a Graph with NetworkX<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
+<span class="n">nodes</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">graphdataclean</span><span class="p">:</span>
+	<span class="n">nodes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">0</span><span class="p">],{</span><span class="s1">&#39;type&#39;</span> <span class="p">:</span> <span class="n">row</span><span class="p">[</span><span class="mi">2</span><span class="p">]})</span> <span class="p">)</span>
+	<span class="n">nodes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">1</span><span class="p">],{</span><span class="s1">&#39;type&#39;</span> <span class="p">:</span> <span class="n">row</span><span class="p">[</span><span class="mi">3</span><span class="p">]})</span> <span class="p">)</span>
+
+<span class="n">edges</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">graphdataclean</span><span class="p">:</span>
+	<span class="n">edges</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">row</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="p">)</span>
+
+<span class="kn">import</span> <span class="nn">networkx</span> <span class="k">as</span> <span class="nn">nx</span>
+<span class="n">G</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">Graph</span><span class="p">()</span>
+<span class="n">G</span><span class="o">.</span><span class="n">add_nodes_from</span><span class="p">(</span><span class="n">nodes</span><span class="p">)</span>
+<span class="n">G</span><span class="o">.</span><span class="n">add_edges_from</span><span class="p">(</span><span class="n">edges</span><span class="p">)</span>
+<span class="n">labels</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">get_node_attributes</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">)</span> 
+<span class="n">nx</span><span class="o">.</span><span class="n">draw_networkx</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="n">labels</span><span class="p">)</span>
+
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>First we will make a list / dictionary with the node attributes (the prey-bait)</p></li>
+<li><p>Then an array with the edges. Refer to Networkx <a class="reference external" href="https://networkx.org/documentation/stable/tutorial.html">documentation</a> for <a class="reference external" href="https://i.ibb.co/0C0XZ48/Screenshot-2022-02-14-9-44-36-PM.png">example</a></p></li>
+</ul>
+</div>
+<hr class="docutils" />
+<div class="section" id="a-smaller-graph-to-visualize-easier">
+<h1>A smaller graph to visualize easier<a class="headerlink" href="#a-smaller-graph-to-visualize-easier" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p>Possibly some artefacts of nodes missing labels due to the slicing below</p></li>
+<li><p>Open question : how does “prey-bait” node connections in graph correspond to experimental design</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
+<span class="n">nodesub</span> <span class="o">=</span> <span class="n">nodes</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">50</span><span class="p">]</span>
+<span class="n">edgesub</span> <span class="o">=</span> <span class="n">edges</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">50</span><span class="p">]</span>
+
+<span class="n">subG</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">Graph</span><span class="p">()</span>
+<span class="n">subG</span><span class="o">.</span><span class="n">add_nodes_from</span><span class="p">(</span><span class="n">nodesub</span><span class="p">)</span>
+<span class="n">subG</span><span class="o">.</span><span class="n">add_edges_from</span><span class="p">(</span><span class="n">edgesub</span><span class="p">)</span>
+<span class="n">labels</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">get_node_attributes</span><span class="p">(</span><span class="n">subG</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">)</span> 
+<span class="n">nx</span><span class="o">.</span><span class="n">draw_networkx</span><span class="p">(</span><span class="n">subG</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="n">labels</span><span class="p">)</span>
+
+</pre></div>
+</div>
+</div>
+<hr class="docutils" />
+<div class="section" id="more-dimensions-in-the-node-data-for-machine-predictions">
+<h1>More dimensions in the node data for machine predictions<a class="headerlink" href="#more-dimensions-in-the-node-data-for-machine-predictions" title="Permalink to this headline">¶</a></h1>
+<p><img alt="" src="https://i.ibb.co/vLbRWPj/Screenshot-2022-02-15-7-17-28-PM.png" /></p>
+<ul class="simple">
+<li><p>Each node has a single parameter (a single dimension) of data associated with it (prey or bait)</p></li>
+<li><p>The more data, the better for machine learning predictions of unknown nodes</p></li>
+<li><p>The annotations field has complex function description entered by bioinformatics analysts / curators</p></li>
+</ul>
+</div>
+<hr class="docutils" />
+<div class="section" id="how-do-we-code-human-writen-text-for-machine-predictions">
+<h1>How do we code human writen text for machine predictions<a class="headerlink" href="#how-do-we-code-human-writen-text-for-machine-predictions" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p>We need to codify the text as <a class="reference external" href="https://medium.com/analytics-vidhya/one-hot-encoding-of-text-data-in-natural-language-processing-2242fefb2148">one-hot encoded (1’s and 0’s) vectors</a></p></li>
+</ul>
+<p><img alt="" src="https://i.ibb.co/pyG53Dd/Screenshot-2022-02-15-7-36-26-PM.png" /></p>
+<ul class="simple">
+<li><p>In the example above there are 7-dimensional vectors, each word in the node annotations represents a separate dimension</p></li>
+<li><p>Annotations can have hundreds or thousands of dimensions, one for each word</p></li>
+</ul>
+</div>
+<hr class="docutils" />
+<div class="section" id="id2">
+<h1>How do we code human writen text for machine predictions<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p>Capturing in the vectors the context (surrounding) of each word for defining meaning precisely</p></li>
+<li><p><a class="reference external" href="https://en.wikipedia.org/wiki/Natural_language_processing">Natural Languange Processing</a> (NLP) for human language data mining</p></li>
+<li><p>For example: <strong>“We went to the river bank”</strong></p></li>
+<li><p><strong>“We made a deposit at the bank”</strong></p></li>
+<li><p>Difference in meaning of word “bank” needs to be modeled in data for machine learning / AI applications</p></li>
+</ul>
+</div>
+<hr class="docutils" />
+<div class="section" id="back-to-bioinformatics">
+<h1>Back to bioinformatics !<a class="headerlink" href="#back-to-bioinformatics" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p>Our focus is how to add the rich annotation data on each node on our graphs</p></li>
+<li><p>Add in a vectorized, one-hot encoded format data on each node, not focus on NLP</p></li>
+<li><p>We will use algorithms and Python libraries such as <a class="reference external" href="https://towardsdatascience.com/a-word2vec-implementation-using-numpy-and-python-d256cf0e5f28">Word2vec</a> also <a class="reference external" href="https://stackabuse.com/implementing-word2vec-with-gensim-library-in-python/">here</a> and <a class="reference external" href="https://www.machinelearningplus.com/nlp/gensim-tutorial/">Gensim</a> from NLP</p></li>
+<li><p>Once the graph is in place and one-hot encoded data on the nodes, we will run machine learning algorithms on it</p></li>
+<li><p>Please read carefully the content from the links above !</p></li>
+</ul>
+</div>
+<hr class="docutils" />
+<div class="section" id="bag-of-words-representation">
+<h1>Bag of words representation<a class="headerlink" href="#bag-of-words-representation" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p>Create a dictionary - the set of unique words - from the sentences (or the “corpus”)</p></li>
+<li><p>Parse the sentences and create a one-hot encoded vector from each sentence:</p></li>
+</ul>
+<p><img alt="" src="https://miro.medium.com/max/1400/1*hLvya7MXjsSc3NS2SoLMEg.png" />
+<a class="reference external" href="https://www.ronaldjamesgroup.com/blog/grab-your-wine-its-time-to-demystify-ml-and-nlp">Image credit</a></p>
+<ul class="simple">
+<li><p>Easy to implement, but a lot of wasted space, context not differentiated (“bank deposit” vs “river bank”)</p></li>
+</ul>
+</div>
+<hr class="docutils" />
+<div class="section" id="id3">
+<h1>Bag of words representation<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h1>
+<p>W</p>
+<ul class="simple">
+<li><p>Create a dictionary - the set of unique word counts - from the annotations (or the “corpus”)</p></li>
+<li><p>Then  create a one-hot encoded group of vectors - multidimensional matrix (or tensor) attached to each node</p></li>
+<li><p>First lets have our files with protein ids and annotations as accompanying data</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>!cut -f 1-2,26-27 ./content/15761153.txt | head -n 2
+!cut -f 1-2,26-27 ./content/15761153.txt &gt; ./content/15761153-cut.tsv
+</pre></div>
+</div>
+</div>
+<hr class="docutils" />
+<div class="section" id="let-s-parse-out-the-annotations">
+<h1>Let’s parse out the annotations<a class="headerlink" href="#let-s-parse-out-the-annotations" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;/home/bioitx/Author/private-bioitx-AI/BioinformAI/content/15761153-cut.tsv&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+  <span class="n">graphdata</span> <span class="o">=</span> <span class="p">[</span><span class="n">line</span><span class="o">.</span><span class="n">rstrip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">)</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">f</span><span class="p">]</span>
+
+<span class="n">graphdataclean</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">graphdata</span><span class="p">[</span><span class="mi">1</span><span class="p">:]:</span>
+  <span class="n">graphdataclean</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">element</span><span class="p">:</span> <span class="n">element</span><span class="p">[</span><span class="mi">10</span><span class="p">:],</span> <span class="n">row</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">]))</span> \
+                      <span class="o">+</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">element</span><span class="p">:</span> <span class="n">element</span><span class="p">[</span><span class="mi">22</span><span class="p">:],</span> <span class="n">row</span><span class="p">[</span><span class="mi">2</span><span class="p">:])))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">graphdataclean</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+</pre></div>
+</div>
+</div>
+<hr class="docutils" />
+<div class="section" id="let-s-one-hot-encode-the-annotations">
+<h1>Let’s one-hot encode the annotations<a class="headerlink" href="#let-s-one-hot-encode-the-annotations" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p>Do not forget to run “!pip install gensim”</p></li>
+<li><p>We will follow examples from <a class="reference external" href="https://www.machinelearningplus.com/nlp/gensim-tutorial/">this tutorial</a></p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
+<span class="kn">import</span> <span class="nn">gensim</span>
+<span class="kn">from</span> <span class="nn">gensim</span> <span class="kn">import</span> <span class="n">corpora</span>
+
+<span class="n">corpus</span><span class="o">=</span><span class="p">[]</span>
+<span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">graphdataclean</span><span class="p">:</span>
+	<span class="n">corpus</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+	<span class="n">corpus</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span>
+
+  <span class="c1">#print(corpus[0:2])</span>
+
+<span class="n">annotwords</span> <span class="o">=</span> <span class="p">[[</span><span class="n">word</span> <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">annotation</span><span class="o">.</span><span class="n">split</span><span class="p">()]</span> <span class="k">for</span> <span class="n">annotation</span> <span class="ow">in</span> <span class="n">corpus</span><span class="p">]</span>
+<span class="n">annotdict</span> <span class="o">=</span> <span class="n">corpora</span><span class="o">.</span><span class="n">Dictionary</span><span class="p">(</span><span class="n">annotwords</span><span class="p">)</span>
+
+<span class="c1">#print(annotwords[0:2])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">annotdict</span><span class="o">.</span><span class="n">token2id</span><span class="p">)</span>
+
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
+<span class="nb">print</span><span class="p">(</span><span class="n">annotdict</span><span class="p">[</span><span class="mi">100</span><span class="p">])</span>
+
+</pre></div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="2-graphs-parsing.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Graph theory and machine learning for bioinformatics continued</p>
+        </div>
+    </a>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By The Jupyter Book community<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>

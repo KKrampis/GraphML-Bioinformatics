@@ -34,7 +34,8 @@ and this [online course](https://www.ebi.ac.uk/training/online/courses/network-a
 
 ---
 
-### An example of a biological graph is shown in the image below (credit [Hennah, Porteus](http://www.plosone.org/article/info%3Adoi%2F10.1371%2Fjournal.pone.0004906) CC BY 2.5 Licence)
+### An example of a biological graph 
+(credit [Hennah, Porteus](http://www.plosone.org/article/info%3Adoi%2F10.1371%2Fjournal.pone.0004906) CC BY 2.5 Licence)
 
 ![width:800px](https://upload.wikimedia.org/wikipedia/commons/7/72/Network_of_how_100_of_the_528_genes_identified_with_significant_differential_expression_relate_to_DISC1_and_its_core_interactors.png)
 
@@ -42,7 +43,7 @@ The different shapes of the nodes represent different attributes, the edges here
 
 ---
 
-### Example graphs in bioinformatics : Protein-protein interaction (PPI) networks
+### Protein-protein interaction (PPI) network graphs
 
 * Protein-protein interaction networks (PINs) represent the physical relationship among proteins present in a cell
 * Proteins are nodes, and their interactions are undirected edges
@@ -101,6 +102,8 @@ nx.draw(G, labels=labels, font_weight='bold')
 ```
 ---
 
+**Refer to these links for the graph coding examples and exercises**
+
 Full documentation in NetworkX [tutorial](https://networkx.org/documentation/stable/tutorial.html)
 and [NetworkX reference](https://networkx.org/documentation/stable/reference/classes/index.html)
 
@@ -109,26 +112,67 @@ and [NetworkX reference](https://networkx.org/documentation/stable/reference/cla
 ### Graphs for complex bioinformatics data
 
 ![](https://www.ebi.ac.uk/training/online/courses/network-analysis-of-protein-interaction-data-an-introduction/wp-content/uploads/sites/64/2020/08/new-fig-3.png)
-### (credit [European Bioinformatics Institute](https://www.ebi.ac.uk/training/online/courses/network-analysis-of-protein-interaction-data-an-introduction/introduction-to-graph-theory/graph-theory-graph-types-and-edge-properties/) CC BY 2.5 Licence)
+(credit [European Bioinformatics Institute](https://www.ebi.ac.uk/training/online/courses/network-analysis-of-protein-interaction-data-an-introduction/introduction-to-graph-theory/graph-theory-graph-types-and-edge-properties/) CC BY 2.5 Licence)
 
 ---
 
 ### Data structures for graphs data
 
 ![](https://www.ebi.ac.uk/training/online/courses/network-analysis-of-protein-interaction-data-an-introduction/wp-content/uploads/sites/64/2020/08/new-fig-4.png)
-### (credit [European Bioinformatics Institute](https://www.ebi.ac.uk/training/online/courses/network-analysis-of-protein-interaction-data-an-introduction/introduction-to-graph-theory/graph-theory-graph-types-and-edge-properties/) CC BY 2.5 Licence)
+(credit [European Bioinformatics Institute](https://www.ebi.ac.uk/training/online/courses/network-analysis-of-protein-interaction-data-an-introduction/introduction-to-graph-theory/graph-theory-graph-types-and-edge-properties/) CC BY 2.5 Licence)
 
 ---
 
 ### Let's see this in Python code 
 
+* Directed graphs represent directed control, for example biological regulation data
+* For example Gene A, regulates Gene B
+* Or Protein A controls gene expression of Gene C
+
 ```python
 
 G1 = nx.DiGraph() #now we have a directed graph
 G1.add_edges_from([(1,2), (2,3), (3, 4), (3, 5)]) #this adds nodes and edges 
+G1.nodes[1]["name"] = "GeneA"
+G1.nodes[2]["name"] = "GeneB"
+G1.nodes[3]["name"] = "ProteinA"
+G1.nodes[4]["name"] = "GeneC"
+labels = nx.get_node_attributes(G1, 'name') #using custom labels for nodes nx.draw(G1, labels=labels, font_weight='bold') 
 
 ```
+---
 
+### 
+
+![](https://www.ebi.ac.uk/training/online/courses/network-analysis-of-protein-interaction-data-an-introduction/wp-content/uploads/sites/64/2020/08/new-fig-5.png)<br>
+(credit [European Bioinformatics Institute](https://www.ebi.ac.uk/training/online/courses/network-analysis-of-protein-interaction-data-an-introduction/introduction-to-graph-theory/graph-theory-graph-types-and-edge-properties/) CC BY 2.5 Licence)
+
+* The degree is the number of edges that connect to a node
+* The degree of each node is indicated and reflected in its size and colour
+* Directed network nodes have two values : out-degree and in-degree 
+
+---
+
+### 
+
+![](https://www.ebi.ac.uk/training/online/courses/network-analysis-of-protein-interaction-data-an-introduction/wp-content/uploads/sites/64/2020/08/new-fig-6.png)<br>
+(credit [European Bioinformatics Institute](https://www.ebi.ac.uk/training/online/courses/network-analysis-of-protein-interaction-data-an-introduction/introduction-to-graph-theory/graph-theory-graph-types-and-edge-properties/) CC BY 2.5 Licence)
+
+* Paths between nodes : how many nodes "hops" or steps
+* Is used to model how information flows 
+* Also to model how distant protein / genes control others 
+* Algorithms to calculate shortest paths on the graph
+
+---
+
+### 
+
+![](https://www.ebi.ac.uk/training/online/courses/network-analysis-of-protein-interaction-data-an-introduction/wp-content/uploads/sites/64/2020/08/new-fig-7.png)<br>
+(credit [European Bioinformatics Institute](https://www.ebi.ac.uk/training/online/courses/network-analysis-of-protein-interaction-data-an-introduction/introduction-to-graph-theory/graph-theory-graph-types-and-edge-properties/) CC BY 2.5 Licence)
+
+* Scale-free networks are those which have high connectivity hubs
+* This means (sometimes equally) short paths from one section of the network to the other
+* Additional concepts of centrality and transitivity, see [here](https://www.ebi.ac.uk/training/online/courses/network-analysis-of-protein-interaction-data-an-introduction/introduction-to-graph-theory/graph-theory-network-topology/) for more details
 
 ---
 
@@ -138,3 +182,8 @@ G1.add_edges_from([(1,2), (2,3), (3, 4), (3, 5)]) #this adds nodes and edges
 
 ```
 ---
+
+
+**Author: Konstantinos Krampis, 2021**<br><br> 
+License: Creative Commons Attribution-NonCommercial-NoDerivs<br><br>
+[CC BY-NC-ND](https://creativecommons.org/licenses/by-nc-nd/4.0/) ![](https://licensebuttons.net/l/by-nc-nd/3.0/88x31.png) 
