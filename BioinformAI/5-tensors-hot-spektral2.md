@@ -12,8 +12,6 @@ jupyter:
     name: python3
 ---
 
----
-
 ### One-hot encoding of protein annotations
 
 ![](https://i.ibb.co/ZSs4NGz/Screenshot-2022-02-19-7-38-54-PM.png)
@@ -30,7 +28,8 @@ import numpy as np
 import gensim
 from gensim import corpora
 
-annotations = ['This protein phosporylates a gene','This protein catalyzes a reaction','This gene controls RNA expression', 'This gene controls a gene']
+annotations = ['This protein phosporylates a gene','This protein catalyzes a reaction', \
+'This gene controls RNA expression', 'This gene controls a gene']
 
 annotwords = [[word for word in annotation.split()] for annotation in annotations]
 annotdict = corpora.Dictionary(annotwords)
@@ -42,9 +41,7 @@ for i, annotation in enumerate(annotations):
     index = annotdict.token2id.get(word)
     annotensor[i, j, index] = 1.   
 
-print(annotwords,"\n")
-print(annotdict.token2id,"\n")
-print(annotensor)
+print(annotwords,"\n");print(annotdict.token2id,"\n");print(annotensor)
 ```
 
 ---
@@ -70,6 +67,8 @@ anotvec = np.reshape(anot,[4,1])
 
 print(anotvec,"\n")
 ```
+![](https://i.ibb.co/ZSs4NGz/Screenshot-2022-02-19-7-38-54-PM.png)
+
 ---
 
 ### A graph with the compressed annotations as node attributes
@@ -101,7 +100,6 @@ nx.draw_shell(G, arrows=True, labels=labels)
 
 ### Update node attributes based on neighboors
 
-* Rename vector with the annotation numbers "X" to match tutorial we follow [here](https://towardsdatascience.com/how-to-do-deep-learning-on-graphs-with-graph-convolutional-networks-7d2250723780) and [here](https://towardsdatascience.com/understanding-graph-convolutional-networks-for-node-classification-a2bfdb7aba7b)  
 
 ```python
 X = anotvec
@@ -117,7 +115,8 @@ for i in G.nodes:
 labels = nx.get_node_attributes(G, 'annotval') 
 nx.draw_shell(G, arrows=True, labels=labels)
 ```
-
+* Remember the numbers represent "codified" annotations (although very simplified in our example)
+* Rename vector with the annotation numbers "X" to match tutorial we follow [here](https://towardsdatascience.com/how-to-do-deep-learning-on-graphs-with-graph-convolutional-networks-7d2250723780) and [here](https://towardsdatascience.com/understanding-graph-convolutional-networks-for-node-classification-a2bfdb7aba7b)  
 ---
 
 ### Adding self-loops
@@ -138,8 +137,7 @@ labels = nx.get_node_attributes(G, 'annotval')
 nx.draw_shell(G, labels=labels)
 ```
 
-* With addition of the identity matrix we add self-loops in the graph
-* This allow us to sum up also the self-value of each node
+* Add the identity matrix, we add self-loops in the graph, sum up also the annotation value of each node
 
 ---
 
@@ -151,9 +149,9 @@ D = np.array(np.sum(A, axis=0))[0]
 D = np.matrix(np.diag(D))
 anotvecscaled = D**-1 * A1 * X
 
-print(D,"\n")
-print(D**-1,"\n")
-print(A1,"\n")
+print(D,"\n");print(A,"\n")
+print("D(5x5) * A1(5x5) * X(5x1) = annotvecscaled(5x1)\n")
+print(D**-1,"\n");print(A1,"\n");print(X,"\n")
 print(anotvecscaled,"\n")
 
 for i in G.nodes:
@@ -163,15 +161,16 @@ labels = nx.get_node_attributes(G, 'annotval')
 nx.draw_shell(G, labels=labels)
 ```
 
-* We sum the number of edges per node (the 1's in each column of the adjacency matrix)
-* We put the number of edges on the diagonal for the proper matrix multiplication
+* D sums the number of edges per node (the 1's in each column of the adjacency matrix A)
+* Inverse number of edges on diag(D), scales / normalizes annotation number assigned to each node during the matrix multiplication
 
 ---
 ### A step back to consider our algorithmic approach
 
+![](https://i.ibb.co/FKRHNBL/Screenshot-2022-03-07-12-13-28-PM.png)
+
 * The numbers represent "annotations", matrix manipulations to propagate these annotations along the graph structure
 * We are performing "message passing" in the graph so that we can annotate unknown nodes (the node with the "0")
 * We implemented (*almost*) the formula / algorithm shown below, and with [Spektral](https://graphneural.network/layers/convolution/#gcnconv) we can apply it to large-scale graphs
+* The formula shows symmetric multiplication (diag(D) on both sides), also with inverse square root (our scaling almost does that)
 * Spektral handles the true annotations, represented as one-hot encoded vectors (remember, computers can only understand numbers!)
-
-![](https://i.ibb.co/Qf7DtC2/Screenshot-2022-02-22-10-42-34-PM.png)
